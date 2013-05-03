@@ -1,4 +1,7 @@
 Orangehrmapi::Application.routes.draw do
+  resources :ohrm_users
+
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -9,7 +12,11 @@ Orangehrmapi::Application.routes.draw do
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
-
+      match 'login'=>'login#login'
+      match 'ohrmattendancerecord/get_records' => 'ohrm_attendance_records#get_records'
+      match 'ohrmattendancerecord/get_time' => 'ohrm_attendance_records#get_time'
+      match 'ohrmattendancerecord/punch_out'=>'ohrm_attendance_records#punch_out'
+      match 'ohrmattendancerecord/punch_in'=>'ohrm_attendance_records#punch_in'
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
@@ -45,11 +52,16 @@ Orangehrmapi::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+	namespace "api" do
+		resources :ohrm_users, :defaults =>{ :format =>'json'}
+	end
+	namespace "api" do
+		resources :ohrm_attendance_records, :defaults =>{ :format =>'json'}
+	end
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
-
+   root :to => 'ohrm_users#index'
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

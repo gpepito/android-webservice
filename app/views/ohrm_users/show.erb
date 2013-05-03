@@ -1,0 +1,9 @@
+<h1>Nerubia</h1>
+
+<% if @user%>
+Employee Number:<%= @user.emp_number %> <br/>
+Employee User Name:<%=@user.user_name%> <br/>
+Employee Password:<%=@user.user_password%>
+<% else%>
+User not Found
+<% end%>
